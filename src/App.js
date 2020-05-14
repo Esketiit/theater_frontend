@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Home from './components/Home'
+import Room from './components/Room'
+import RoomCreation from './components/RoomCreation'
+import ProfileOptions from './components/ProfileOptions'
+import RoomSelect from './containers/RoomSelect'
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  render() {
+    return (
+      <>
+        <Router>
+          <Route path="/home" component={Home} />
+          <Route path="/create" component={RoomCreation} />
+          <Route path="/profile" component={ProfileOptions} />
+          <Route path="/select" component={RoomSelect} />
+          <Route path="/room" render={routerProps => <Room {...routerProps} />} />
+        </Router>
+      </>
+    );
+  }
 }
 
 export default App;
