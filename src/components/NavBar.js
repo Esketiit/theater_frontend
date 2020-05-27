@@ -22,7 +22,7 @@ class NavBar extends React.Component {
                         <Link to={'/select'}>TO ROOM SELECT</Link>
                     </Menu.Item>
                     <Menu.Item >
-                        <Link to={'/home'}>LOGOUT</Link>
+                        {this.props.username ? <Link to={'/home'}>LOGOUT</Link> : <Link to={'/home'}>LOGIN</Link>}
                     </Menu.Item>
                     <Menu.Item>
                         {this.props.username ? `Logged In As: ${this.props.username}` : "Not Logged In"}

@@ -3,6 +3,7 @@ import ReactPlayer from 'react-player'
 import NavBar from './NavBar'
 import CommentSection from '../containers/CommentSection'
 import { Button, List, Modal, Form } from 'semantic-ui-react'
+import Flexbox from 'flexbox-react';
 
 
 class Room extends React.Component {
@@ -13,7 +14,8 @@ class Room extends React.Component {
         videoName: "",
         link: "",
         playlist_id: null,
-        volume: 0
+        volume: 0,
+        id: null
     }
 
     getVideos = () => {
@@ -25,7 +27,8 @@ class Room extends React.Component {
                 // console.log(data.videos)
                 this.setState({
                     queue: data.videos,
-                    playlist_id: data.playlist[0].id
+                    playlist_id: data.playlist[0].id,
+                    id: data.id
                 })
             })
     }
@@ -87,7 +90,7 @@ class Room extends React.Component {
             if (index === this.state.queueIndex) {
                 return (
                     // <h4 className="currentlyPlaying">{`${index}.) ${video.name}  <-- Currently Playing`} </h4>
-                    <List.Item>
+                    <List.Item key={video.id}>
                         <List.Content floated='right'>
                             <Button id={video.id} color="black" onClick={e => this.deleteVideo(e)} > Delete</Button>
                         </List.Content>
@@ -99,7 +102,7 @@ class Room extends React.Component {
                 )
             } else {
                 return (
-                    <List.Item>
+                    <List.Item key={video.id}>
                         <List.Content floated='right'>
                             <Button id={video.id} color="black" onClick={e => this.deleteVideo(e)}>Delete</Button>
                         </List.Content>
@@ -149,16 +152,12 @@ class Room extends React.Component {
         return (
             <>
                 <NavBar username={this.props.username} />
-                <div className="player">
-                    {this.state.queue ? <ReactPlayer url={this.state.queue[this.state.queueIndex].link} playing={this.state.playing} volume={`${this.state.volume}`} /> : null}
+                <div>
+                    {this.state.queue ? <ReactPlayer url={this.state.queue[this.state.queueIndex].link} playing={this.state.playing} volume={0} /> : null}
                     <span>{this.state.queueIndex}</span>
                     <Button onClick={this.playing}>Play/Pause</Button>
                     <Button onClick={this.previous}>Previous Video</Button>
                     <Button onClick={this.next}>Next Video</Button><br></br>
-                    {/* <Button onClick={() => this.volumeUp()}>Volume Up</Button>
-                    <span>{this.state.volume}</span>
-                    <Button onClick={() => this.volumeDown()} > Volume Down</Button>
-                    get rid of volume controls if you don't have em working */}
 
                     <Modal trigger={<Button primary>Add Video</Button>}>
                         <Modal.Header>
@@ -173,8 +172,10 @@ class Room extends React.Component {
                             <Button onClick={() => this.addVideo()}>Create Video</Button>
                         </Modal.Content>
                     </Modal>
+
                     {this.state.queue ? <List celled> {this.showVideos()} </List> : null}
-                    <CommentSection />
+
+                    {this.state.id ? <CommentSection id={this.state.id} username={this.props.username} /> : null}
                 </div>
             </>
         );
