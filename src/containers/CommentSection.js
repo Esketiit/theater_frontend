@@ -58,11 +58,11 @@ class CommentSection extends React.Component {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
-            body: {
+            body: JSON.stringify({
                 "user_name": this.state.currentUser,
                 content: this.state.comment,
                 "room_id": this.props.id
-            }
+            })
         })
             .then(resp => resp.json())
             .then(data => console.log(data))

@@ -152,7 +152,7 @@ class Room extends React.Component {
         return (
             <>
                 <NavBar username={this.props.username} />
-                <div>
+                <Flexbox flexDirection="column" minHeight="100vh">
                     {this.state.queue ? <ReactPlayer url={this.state.queue[this.state.queueIndex].link} playing={this.state.playing} volume={0} /> : null}
                     <span>{this.state.queueIndex}</span>
                     <Button onClick={this.playing}>Play/Pause</Button>
@@ -176,7 +176,7 @@ class Room extends React.Component {
                     {this.state.queue ? <List celled> {this.showVideos()} </List> : null}
 
                     {this.state.id ? <CommentSection id={this.state.id} username={this.props.username} /> : null}
-                </div>
+                </Flexbox>
             </>
         );
     }
