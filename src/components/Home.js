@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
-
+import { withRouter } from 'react-router-dom';
 
 class Home extends React.Component {
     state = {
@@ -15,6 +14,11 @@ class Home extends React.Component {
 
     signIn = () => {
         this.props.login(this.state.name)
+        this.props.history.push('/select');
+    }
+
+    componentDidMount() {
+        this.props.logout()
     }
 
     render() {
@@ -30,7 +34,7 @@ class Home extends React.Component {
                             <Segment stacked>
                                 <Form.Input onChange={(e) => this.handleChange(e)} name="name" value={this.state.name} fluid icon='user' iconPosition='left' placeholder='User Name' />
                                 <Button color='teal' fluid size='large' onClick={() => this.signIn()}>
-                                    <Link to={'/select'}>Login</Link>
+                                    Login
                                 </Button>
                             </Segment>
                         </Form>

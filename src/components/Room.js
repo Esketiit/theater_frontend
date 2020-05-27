@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactPlayer from 'react-player'
 import NavBar from './NavBar'
+import CommentSection from '../containers/CommentSection'
 import { Button, List, Modal, Form } from 'semantic-ui-react'
 
 
@@ -147,7 +148,7 @@ class Room extends React.Component {
         // console.log(this.props.rooms[this.props.match.params.id].playlist, "props")
         return (
             <>
-                <NavBar />
+                <NavBar username={this.props.username} />
                 <div className="player">
                     {this.state.queue ? <ReactPlayer url={this.state.queue[this.state.queueIndex].link} playing={this.state.playing} volume={`${this.state.volume}`} /> : null}
                     <span>{this.state.queueIndex}</span>
@@ -173,6 +174,7 @@ class Room extends React.Component {
                         </Modal.Content>
                     </Modal>
                     {this.state.queue ? <List celled> {this.showVideos()} </List> : null}
+                    <CommentSection />
                 </div>
             </>
         );

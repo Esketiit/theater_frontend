@@ -27,20 +27,21 @@ class App extends React.Component {
 
   logout = () => {
     this.setState({ user: "" })
+    console.log("logged out")
   }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
     return (
       <>
         <Router>
-          <Route path="/" exact render={routerProps => <Home {...routerProps} login={this.login} />} />
-          <Route path="/home" render={routerProps => <Home {...routerProps} login={this.login} />} />
-          <Route path="/createroom" component={RoomCreation} />
-          <Route path="/createplaylist" component={PlalistCreation} />
+          <Route path="/" exact render={routerProps => <Home {...routerProps} logout={this.logout} login={this.login} />} />
+          <Route path="/home" render={routerProps => <Home {...routerProps} logout={this.logout} login={this.login} />} />
+          <Route path="/createroom" render={() => <RoomCreation username={this.state.user} />} />
+          <Route path="/createplaylist" render={() => <PlalistCreation username={this.state.user} />} />
           <Route path="/profile" component={ProfileOptions} />
-          <Route path="/select" render={routerProps => <RoomSelect {...routerProps} rooms={this.state.rooms} />} />
-          <Route path="/room/:id" render={routerProps => <Room {...routerProps} user={this.state.user} />} />
+          <Route path="/select" render={routerProps => <RoomSelect {...routerProps} username={this.state.user} rooms={this.state.rooms} />} />
+          <Route path="/room/:id" render={routerProps => <Room {...routerProps} username={this.state.user} />} />
         </Router>
       </>
     );

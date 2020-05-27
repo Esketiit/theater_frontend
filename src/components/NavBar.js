@@ -12,7 +12,7 @@ class NavBar extends React.Component {
                     {/* <Menu.Item>
                         <Link to={'/profile'}>TO PROFILE PAGE</Link>
                     </Menu.Item> */}
-                    <Menu.Item>
+                    <Menu.Item >
                         <Link to={'/createroom'}>TO ROOM CREATION</Link>
                     </Menu.Item>
                     {/* <Menu.Item>
@@ -21,13 +21,12 @@ class NavBar extends React.Component {
                     <Menu.Item>
                         <Link to={'/select'}>TO ROOM SELECT</Link>
                     </Menu.Item>
-                    <Menu.Item>
-                        Logged in as:
-                    </Menu.Item>
                     <Menu.Item >
-                        <Button onClick={() => this.logout()}>LOG OUT</Button>
+                        <Link to={'/home'}>LOGOUT</Link>
                     </Menu.Item>
-
+                    <Menu.Item>
+                        {this.props.username ? `Logged In As: ${this.props.username}` : "Not Logged In"}
+                    </Menu.Item>
                 </Menu>
             </div>
         )

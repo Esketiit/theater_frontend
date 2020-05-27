@@ -25,7 +25,7 @@ class RoomSelect extends React.Component {
         // console.log(this.props)
         return (
             <div>
-                <NavBar />
+                <NavBar username={this.props.username} />
                 <h1>RoomSelect Page!</h1>
                 <RoomFilter handleChange={this.handleChange} />
                 {this.props.rooms ? <RoomList rooms={this.filterByName()} /> : null}
