@@ -10,7 +10,7 @@ class RoomCreation extends React.Component {
         name: " ",
         videoName: "",
         link: "",
-        selected: null //not sure why this is here, but I don't want ot get get rid of it yet just in case
+        selected: ""
     }
     //update to only show the playlists that the current user have
     getAllPlaylists = () => {
@@ -22,7 +22,7 @@ class RoomCreation extends React.Component {
 
     handleChange = e => {
         this.setState({ [e.target.name]: e.target.value })
-        console.log(e.target.value, e.target.name, this.state)
+        // console.log(e.target.value, e.target.name, this.state)
     }
 
     handlePlaylist = () => {
@@ -46,7 +46,7 @@ class RoomCreation extends React.Component {
             }
         }
 
-        console.log(room)
+        console.log(this.state.selected)
         fetch("http://localhost:3000/room", {
             method: "POST",
             headers: {
@@ -76,11 +76,11 @@ class RoomCreation extends React.Component {
                     })
                 })
             })
-            .then(this.setState({
-                selected: null,
-                name: "",
-                description: ""
-            }))
+        // this.setState({
+        //     selected: null,
+        //     name: "",
+        //     description: ""
+        // })
     }
 
     // first creates a playlist and then creates a video using the id of the newly created playlist
@@ -133,6 +133,7 @@ class RoomCreation extends React.Component {
     }
     render() {
         const { value } = this.state
+        // console.log(this.state)
         return (
             <div className="room_form">
                 <NavBar />

@@ -1,15 +1,41 @@
 import React from 'react';
+import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
+
 class Home extends React.Component {
+    state = {
+        name: ""
+    }
+
+    handleChange = e => {
+        this.setState({ [e.target.name]: e.target.value })
+        console.log(this.state)
+    }
+
+    signIn = () => {
+        this.props.login(this.state.name)
+    }
 
     render() {
+        console.log(this.props, "props")
         return (
             <div>
-                <h1>Home Page!</h1>
-                <Link to={'/profile'}>TO PROFILE PAGE</Link><br></br>
-                <Link to={'/createroom'}>TO ROOM CREATION</Link><br></br>
-                <Link to={'/select'}>TO ROOM SELECT</Link><br></br>
+                <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+                    <Grid.Column style={{ maxWidth: 450 }}>
+                        <Header as='h2' color='teal' textAlign='center'>
+                            Log-in to your account
+                        </Header>
+                        <Form size='large'>
+                            <Segment stacked>
+                                <Form.Input onChange={(e) => this.handleChange(e)} name="name" value={this.state.name} fluid icon='user' iconPosition='left' placeholder='User Name' />
+                                <Button color='teal' fluid size='large' onClick={() => this.signIn()}>
+                                    <Link to={'/select'}>Login</Link>
+                                </Button>
+                            </Segment>
+                        </Form>
+                    </Grid.Column>
+                </Grid>
             </div>
         )
     }

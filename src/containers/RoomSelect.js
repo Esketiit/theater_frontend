@@ -8,7 +8,7 @@ import { Route } from 'react-router-dom';
 class RoomSelect extends React.Component {
     state = {
         tags: null,
-        searchName: "",
+        searchName: null,
         size: null
     }
 
