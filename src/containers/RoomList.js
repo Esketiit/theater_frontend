@@ -22,7 +22,7 @@ class RoomList extends React.Component {
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell>Room Name</Table.HeaderCell>
-                        <Table.HeaderCell>First Playlist</Table.HeaderCell>
+                        <Table.HeaderCell>Room Playlist</Table.HeaderCell>
                         <Table.HeaderCell>Description</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>

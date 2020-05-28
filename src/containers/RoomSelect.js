@@ -24,12 +24,14 @@ class RoomSelect extends React.Component {
     render() {
         // console.log(this.props)
         return (
-            <div>
+            <>
                 <NavBar username={this.props.username} />
-                <h1>RoomSelect Page!</h1>
-                <RoomFilter handleChange={this.handleChange} />
-                {this.props.rooms ? <RoomList rooms={this.filterByName()} /> : null}
-            </div>
+                <div className="roomselect">
+                    <h1>Room List</h1>
+                    <RoomFilter handleChange={this.handleChange} />
+                    {this.props.rooms ? <RoomList rooms={this.filterByName()} /> : null}
+                </div>
+            </>
         )
     }
 }

@@ -28,7 +28,7 @@ class Home extends React.Component {
                 <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
                     <Grid.Column style={{ maxWidth: 450 }}>
                         <Header as='h2' color='teal' textAlign='center'>
-                            Log-in to your account
+                            Welcome To Theater
                         </Header>
                         <Form size='large'>
                             <Segment stacked>

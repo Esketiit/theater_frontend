@@ -65,14 +65,14 @@ class CommentSection extends React.Component {
             })
         })
             .then(resp => resp.json())
-            .then(data => console.log(data))
+            .then(data => this.setState({ content: "" }))
             .then(this.getComments())
     }
 
     render() {
         console.log(this.state)
         return (
-            <Comment.Group>
+            <Comment.Group style={{ margin: 10 }}>
                 {this.showComments()}
                 <Form reply>
                     <Form.Input name="comment" input="text" placeholder="Leave A Comment" value={this.state.comment} onChange={e => this.handleChange(e)} />

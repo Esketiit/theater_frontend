@@ -2,7 +2,7 @@ import React from 'react';
 import ReactPlayer from 'react-player'
 import NavBar from './NavBar'
 import CommentSection from '../containers/CommentSection'
-import { Button, List, Modal, Form } from 'semantic-ui-react'
+import { Button, List, Modal, Form, Grid } from 'semantic-ui-react'
 import Flexbox from 'flexbox-react';
 
 
@@ -152,31 +152,38 @@ class Room extends React.Component {
         return (
             <>
                 <NavBar username={this.props.username} />
-                <Flexbox flexDirection="column" minHeight="100vh">
-                    {this.state.queue ? <ReactPlayer url={this.state.queue[this.state.queueIndex].link} playing={this.state.playing} volume={0} /> : null}
-                    <span>{this.state.queueIndex}</span>
-                    <Button onClick={this.playing}>Play/Pause</Button>
-                    <Button onClick={this.previous}>Previous Video</Button>
-                    <Button onClick={this.next}>Next Video</Button><br></br>
+                <Grid>
+                    <Grid.Row columns={2}>
+                        <Grid.Column centered>
+                            {this.state.queue ? <ReactPlayer style={{ margin: 10 }} url={this.state.queue[this.state.queueIndex].link} playing={this.state.playing} volume={.5} /> : null}
 
-                    <Modal trigger={<Button primary>Add Video</Button>}>
-                        <Modal.Header>
-                            Add Video To Playlist
+                            {/* <span>{this.state.queueIndex}</span> */}
+                            <Button style={{ margin: 10 }} onClick={this.playing}>Play/Pause</Button>
+                            <Button style={{ margin: 10 }} onClick={this.previous}>Previous Video</Button>
+                            <Button style={{ margin: 10 }} onClick={this.next}>Next Video</Button>
+                            <Modal trigger={<Button primary>Add Video</Button>}>
+                                <Modal.Header>
+                                    Add Video To Playlist
                         </Modal.Header>
-                        <Modal.Content>
-                            <p>This video will be added to end of playlist</p>
-                            <Form>
-                                <Form.Input name="videoName" label="Enter Video Name:" type="text" value={this.state.videoName} onChange={e => this.handleChange(e)} />
-                                <Form.Input name="link" label="Enter Link:" type="text" value={this.state.link} onChange={e => this.handleChange(e)} />
-                            </Form>
-                            <Button onClick={() => this.addVideo()}>Create Video</Button>
-                        </Modal.Content>
-                    </Modal>
+                                <Modal.Content>
+                                    <p>This video will be added to end of playlist</p>
+                                    <Form>
+                                        <Form.Input name="videoName" label="Enter Video Name:" type="text" value={this.state.videoName} onChange={e => this.handleChange(e)} />
+                                        <Form.Input name="link" label="Enter Link:" type="text" value={this.state.link} onChange={e => this.handleChange(e)} />
+                                    </Form>
+                                    <Button onClick={() => this.addVideo()}>Create Video</Button>
+                                </Modal.Content>
+                            </Modal>
+                        </Grid.Column>
+                        <Grid.Column>
+                            {this.state.id ? <CommentSection id={this.state.id} username={this.props.username} /> : null}
+                        </Grid.Column>
+                    </Grid.Row>
 
-                    {this.state.queue ? <List celled> {this.showVideos()} </List> : null}
-
-                    {this.state.id ? <CommentSection id={this.state.id} username={this.props.username} /> : null}
-                </Flexbox>
+                    <Grid.Row centered columns={1}>
+                        {this.state.queue ? <List style={{ width: "650px" }} celled> {this.showVideos()} </List> : null}
+                    </Grid.Row>
+                </Grid>
             </>
         );
     }
