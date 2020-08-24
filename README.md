@@ -1,6 +1,9 @@
-# README
+
 
 This is the repo for Theater's Rails/Postgres frontend. If you are looking for the Rails backend, [click here](https://github.com/Esketiit/theater_backend "It wont bite") 
+
+## Demo Video 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FlUldKTjdGI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Theater is a project that I whipped up in two weeks for my graduation from Flatiron Academy! It's a platform for people to create, share and view playlists of videos quickly and easily. Theater is still a work in progress, so expect some changes and bugs to pop up as time goes on (help or tips of any kind is very much appeciated). 
 
