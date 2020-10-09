@@ -21,7 +21,7 @@ class Room extends React.Component {
     getVideos = () => {
         let id = this.props.match.params["id"]
         console.log(id)
-        fetch(`http://localhost:3000/room/${id}`)
+        fetch(`http://localhost:3000/rooms/${id}`)
             .then(resp => resp.json())
             .then(data => {
                 // console.log(data.videos)

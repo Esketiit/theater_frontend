@@ -14,11 +14,11 @@ class App extends React.Component {
     user: ""
   }
 
-  componentDidMount() {
-    fetch("http://localhost:3000/room")
-      .then(resp => resp.json())
-      .then(data => this.setState({ rooms: data }))
-  }
+  // componentDidMount() {
+  //   fetch("http://localhost:3000/rooms")
+  //     .then(resp => resp.json())
+  //     .then(data => this.setState({ rooms: data }))
+  // }
 
   login = name => {
     this.setState({ user: name })
@@ -40,7 +40,7 @@ class App extends React.Component {
           <Route path="/createroom" render={() => <RoomCreation username={this.state.user} />} />
           <Route path="/createplaylist" render={() => <PlalistCreation username={this.state.user} />} />
           <Route path="/profile" component={ProfileOptions} />
-          <Route path="/select" render={routerProps => <RoomSelect {...routerProps} username={this.state.user} rooms={this.state.rooms} />} />
+          <Route path="/select" render={routerProps => <RoomSelect {...routerProps} username={this.state.user} />} />
           <Route path="/room/:id" render={routerProps => <Room {...routerProps} username={this.state.user} />} />
         </Router>
       </>

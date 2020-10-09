@@ -7,14 +7,17 @@ class RoomList extends React.Component {
         rooms: null
     }
 
+    // This function makes a fetch request that gets all current rooms and sets state
     getAllRooms = () => {
-        fetch("http://localhost:3000/room")
+        fetch("http://localhost:3000/rooms")
             .then(resp => resp.json())
             .then(data => this.setState({ rooms: data }))
     }
+
     componentDidMount() {
         this.getAllRooms()
     }
+
     renderRooms = () => {
         // console.log(this.props)
         return (
@@ -28,12 +31,13 @@ class RoomList extends React.Component {
                 </Table.Header>
                 <Table.Body>
                     {this.state.rooms.map(room => {
+                        console.log(room, "table body")
                         return (
                             <Table.Row>
                                 <Table.Cell>
                                     <Label color="blue"><Link key={room.id} to={`/room/${room.id}`}>{room.name}</Link></Label>
                                 </Table.Cell>
-                                <Table.Cell>{room.playlist[0].name}</Table.Cell>
+                                <Table.Cell>{room.playlist[0].name ? room.playlist[0].name : "No Playlist name"}</Table.Cell>
                                 <Table.Cell>{room.description}</Table.Cell>
                             </Table.Row>
                         )
@@ -44,7 +48,7 @@ class RoomList extends React.Component {
     }
 
     render() {
-        // console.log(this.props.rooms)
+        console.log(this.state, "render method")
         return (
             <div>
                 {this.state.rooms ? this.renderRooms() : null}

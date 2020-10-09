@@ -12,13 +12,24 @@ class RoomSelect extends React.Component {
         size: null
     }
 
+    // This function makes a fetch request that gets all current rooms and sets state
+    getAllRooms = () => {
+        fetch("http://localhost:3000/rooms")
+            .then(resp => resp.json())
+            .then(data => this.setState({ rooms: data }))
+    }
+
+    componentDidMount() {
+        this.getAllRooms()
+    }
+
     handleChange = e => {
         this.setState({ [e.target.name]: e.target.value })
         console.log(this.filterByName())
     }
 
     filterByName = () => {
-        return this.props.rooms.filter(room => room.name.includes(this.state.searchName))
+        return this.state.rooms.filter(room => room.name.includes(this.state.searchName))
     }
 
     render() {
@@ -29,7 +40,7 @@ class RoomSelect extends React.Component {
                 <div className="roomselect">
                     <h1>Room List</h1>
                     <RoomFilter handleChange={this.handleChange} />
-                    {this.props.rooms ? <RoomList rooms={this.filterByName()} /> : null}
+                    {this.state.rooms ? <RoomList rooms={this.filterByName()} /> : null}
                 </div>
             </>
         )

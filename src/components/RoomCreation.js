@@ -14,7 +14,7 @@ class RoomCreation extends React.Component {
     }
     //update to only show the playlists that the current user have
     getAllPlaylists = () => {
-        fetch("http://localhost:3000/playlist")
+        fetch("http://localhost:3000/playlists")
             .then(resp => resp.json())
             .then(data => this.setState({ playlists: data }))
         console.log("fetch complete")
@@ -38,7 +38,7 @@ class RoomCreation extends React.Component {
         })
     }
 
-    handleSubmit = (e) => {
+    createRoom = (e) => {
         e.preventDefault()
         let room = {
             room: {
@@ -47,7 +47,7 @@ class RoomCreation extends React.Component {
         }
 
         console.log(this.state.selected)
-        fetch("http://localhost:3000/room", {
+        fetch("http://localhost:3000/rooms", {
             method: "POST",
             headers: {
                 "Accept": "application/json",
@@ -62,7 +62,7 @@ class RoomCreation extends React.Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                fetch("http://localhost:3000/room_playlist", {
+                fetch("http://localhost:3000/room_playlists", {
                     method: "POST",
                     headers: {
                         "Accept": "application/json",
@@ -86,7 +86,7 @@ class RoomCreation extends React.Component {
     // first creates a playlist and then creates a video using the id of the newly created playlist
     // then it call getAllPlaylists so the new playlist shows up in playlist drop down
     createPlaylist = () => {
-        fetch("http://localhost:3000/playlist", {
+        fetch("http://localhost:3000/playlists", {
             method: "POST",
             headers: {
                 "Accept": "application/json",
@@ -102,7 +102,7 @@ class RoomCreation extends React.Component {
             .then(data => {
                 console.log(data)
                 this.getAllPlaylists()
-                fetch("http://localhost:3000/video", {
+                fetch("http://localhost:3000/videos", {
                     method: "POST",
                     headers: {
                         "Accept": "application/json",
@@ -145,7 +145,7 @@ class RoomCreation extends React.Component {
                         {this.state.playlists ? this.dropOptions() : ""}
                     </select>
                     <Form.Input name="description" label="Add A Description" input="text" placeholder="Add a Description" value={this.state.description} onChange={e => this.handleChange(e)} />
-                    <Button onClick={e => this.handleSubmit(e)} primary>Create Room!</Button>
+                    <Button onClick={e => this.createRoom(e)} primary>Create Room!</Button>
                     {/* Playlist creation */}
                     <br></br>
                     <Modal trigger={<Button>Create New Playlist</Button>} closeIcon>
