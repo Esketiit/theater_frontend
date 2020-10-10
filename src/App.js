@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Home from './components/Home'
+import Signup from './components/Signup'
 import Room from './components/Room'
 import RoomCreation from './components/RoomCreation'
 import ProfileOptions from './components/ProfileOptions'
@@ -35,8 +35,8 @@ class App extends React.Component {
     return (
       <>
         <Router>
-          <Route path="/" exact render={routerProps => <Home {...routerProps} logout={this.logout} login={this.login} />} />
-          <Route path="/home" render={routerProps => <Home {...routerProps} logout={this.logout} login={this.login} />} />
+          {/* <Route path="/" exact render={routerProps => <Home {...routerProps} logout={this.logout} login={this.login} />} /> */}
+          <Route path="/signup" render={routerProps => <Signup {...routerProps} logout={this.logout} login={this.login} />} />
           <Route path="/createroom" render={() => <RoomCreation username={this.state.user} />} />
           <Route path="/createplaylist" render={() => <PlalistCreation username={this.state.user} />} />
           <Route path="/profile" component={ProfileOptions} />
