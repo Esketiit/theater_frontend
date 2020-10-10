@@ -34,7 +34,11 @@ class Signup extends React.Component {
             })
         },
             { withCredentials: true })
-            .then(resp => console.log(resp, "registration"))
+            .then(resp => resp.json())
+            .then(data => {
+                console.log(data)
+                // { resp.data.status === "created" ? this.props.successfulAuth() : null }
+            })
             .catch(error => console.log(error, "error"))
 
         console.log(this.state)
@@ -42,10 +46,6 @@ class Signup extends React.Component {
 
     login = e => {
         console.log(this.state)
-    }
-
-    componentDidMount() {
-        this.props.logout()
     }
 
     render() {

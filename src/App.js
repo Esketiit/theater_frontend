@@ -11,7 +11,9 @@ import './App.css';
 class App extends React.Component {
   state = {
     rooms: null,
-    user: ""
+    user: "",
+    loginStatus: "false",
+    user: {}
   }
 
   // componentDidMount() {
@@ -20,23 +22,13 @@ class App extends React.Component {
   //     .then(data => this.setState({ rooms: data }))
   // }
 
-  login = name => {
-    this.setState({ user: name })
-    console.log(name)
-  }
-
-  logout = () => {
-    this.setState({ user: "" })
-    console.log("logged out")
-  }
-
   render() {
     // console.log(this.state)
     return (
       <>
         <Router>
           {/* <Route path="/" exact render={routerProps => <Home {...routerProps} logout={this.logout} login={this.login} />} /> */}
-          <Route path="/signup" render={routerProps => <Signup {...routerProps} logout={this.logout} login={this.login} />} />
+          <Route path="/signup" render={routerProps => <Signup {...routerProps} />} />
           <Route path="/createroom" render={() => <RoomCreation username={this.state.user} />} />
           <Route path="/createplaylist" render={() => <PlalistCreation username={this.state.user} />} />
           <Route path="/profile" component={ProfileOptions} />
