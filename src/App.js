@@ -26,7 +26,7 @@ class App extends React.Component {
     console.log("successful auth", data)
     this.setState({
       loginStatus: true,
-      user: data
+      user: data.user
     })
   }
 

@@ -36,7 +36,7 @@ class RoomSelect extends React.Component {
         // console.log(this.props)
         return (
             <>
-                <NavBar username={this.props.username} />
+                <NavBar username={this.props.user.username} />
                 <div className="roomselect">
                     <h1>Room List</h1>
                     <RoomFilter handleChange={this.handleChange} />

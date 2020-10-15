@@ -134,7 +134,7 @@ class RoomCreation extends React.Component {
     render() {
         return (
             <div className="room_form">
-                <NavBar username={this.props.username} />
+                <NavBar username={this.props.user.username} />
                 <h1>RoomCreation Page!</h1>
                 <Form>
                     <Form.Input name="name" label="Room Name:" input="text" placeholder="enter a name" value={this.state.name} onChange={e => this.handleChange(e)} />

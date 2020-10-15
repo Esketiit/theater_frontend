@@ -5,10 +5,9 @@ class ProfileOptions extends React.Component {
 
 
     render() {
-        console.log(this.props.user)
         return (
             <div>
-                <NavBar />
+                <NavBar username={this.props.user.username} />
                 <h1>ProfileOptions Page!</h1>
             </div>
         )
