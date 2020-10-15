@@ -18,7 +18,7 @@ class Signup extends React.Component {
     }
 
     // Sends fetch request to backend to create new user, then signs in with that new user and calls successfulAuth()
-    createAccount = (e) => {
+    createAccount = e => {
         e.preventDefault()
         fetch("http://localhost:3000/registrations", {
             method: "POST",
@@ -46,6 +46,34 @@ class Signup extends React.Component {
             .catch(error => console.log(error, "error"))
 
         console.log(this.state)
+    }
+
+    // login is pretty much the same as createUser but there's no password confirm and the post request goes to /sessions
+    login = e => {
+        e.preventDefault()
+        fetch("http://localhost:3000/sessions", {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                user: {
+                    username: this.state.name,
+                    password: this.state.password,
+                }
+            })
+        },
+            { withCredentials: true })
+            .then(resp => resp.json())
+            .then(user => {
+                if (user.logged_in) {
+                    // sucessfulAuth adds user data to state in app.js, then redirects to the profile page 
+                    this.props.successfulAuth(user)
+                    this.props.history.push("/profile")
+                }
+            })
+            .catch(error => console.log(error, "error"))
     }
 
     render() {
@@ -84,7 +112,7 @@ class Signup extends React.Component {
                                     <Segment stacked>
                                         <Form.Input onChange={(e) => this.handleChange(e)} name="name" value={this.state.name} fluid icon='user' iconPosition='left' placeholder='User Name' />
                                         <Form.Input onChange={(e) => this.handleChange(e)} name="password" value={this.state.password} icon='keyboard outline' fluid iconPosition='left' placeholder='Password' />
-                                        <Button color='teal' fluid size='large' onClick={(e) => this.successfulAuth(e)}>
+                                        <Button color='teal' fluid size='large' onClick={(e) => this.login(e)}>
                                             Login
                                     </Button>
                                     </Segment>
