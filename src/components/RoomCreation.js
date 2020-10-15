@@ -132,8 +132,6 @@ class RoomCreation extends React.Component {
         this.getAllPlaylists()
     }
     render() {
-        const { value } = this.state
-        console.log(this.state)
         return (
             <div className="room_form">
                 <NavBar username={this.props.username} />
