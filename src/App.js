@@ -7,7 +7,6 @@ import ProfileOptions from './components/ProfileOptions'
 import RoomSelect from './containers/RoomSelect'
 import PlalistCreation from './components/PlaylistCreation'
 import './App.css';
-import axios from 'axios'
 
 class App extends React.Component {
   state = {
@@ -15,12 +14,6 @@ class App extends React.Component {
     loginStatus: false,
     user: {}
   }
-
-  // componentDidMount() {
-  //   fetch("http://localhost:3000/rooms")
-  //     .then(resp => resp.json())
-  //     .then(data => this.setState({ rooms: data }))
-  // }
 
   // adds user data to app state and then redirects to the profile page
   successfulAuth = data => {
@@ -37,9 +30,10 @@ class App extends React.Component {
   // fetch("link", {
   //      method: "GET",
   //      headers: headerVariable,
-  //      credentials: 'include' 
+  //      credentials: 'include'    <==== THIS RIGHT HERE
   // })
   // DONT FORGET PLEEAASE, your sanity wont withstand that kind of stress twice!
+  // Axios makes accessing api's easier to type, you should probably look into it
 
   checkLoginStatus = () => {
     fetch("http://localhost:3000/logged_in", {
@@ -69,18 +63,11 @@ class App extends React.Component {
       .catch(error => console.log(error))
   }
 
-  // this is how loginstatus would look with axios
-  // checkLoginStatus = () => {
-  //   axios("http://localhost:3000/logged_in", { withCredentials: true })
-  //     .then(resp => console.log(resp.data, "response from checklogin"))
-  // }
-
   componentDidMount() {
     this.checkLoginStatus()
 
   }
   render() {
-    // console.log(this.state)
     return (
       <>
         <Router>
@@ -97,6 +84,4 @@ class App extends React.Component {
   }
 }
 
-// withRouter() adds router props to the component being exported, in this case it gives router props to app
-// the gives access to things like this.props.history.push in app
 export default App;

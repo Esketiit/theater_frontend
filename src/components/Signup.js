@@ -13,7 +13,6 @@ class Signup extends React.Component {
 
     handleChange = e => {
         this.setState({ [e.target.name]: e.target.value })
-        // console.log(this.state)
     }
 
     // Sends fetch request to backend to create new user, then signs in with that new user and calls successfulAuth()
