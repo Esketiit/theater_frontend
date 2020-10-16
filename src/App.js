@@ -7,6 +7,7 @@ import ProfileOptions from './components/ProfileOptions'
 import RoomSelect from './containers/RoomSelect'
 import PlalistCreation from './components/PlaylistCreation'
 import './App.css';
+import axios from 'axios'
 
 class App extends React.Component {
   state = {
@@ -23,13 +24,61 @@ class App extends React.Component {
 
   // adds user data to app state and then redirects to the profile page
   successfulAuth = data => {
-    console.log("successful auth", data)
     this.setState({
-      loginStatus: true,
+      loginStatus: data.logged_in,
       user: data.user
     })
+    console.log(data, "data in succesfulAuth")
+    console.log(this.state, "app state after successful auth")
   }
 
+  // REMEMBER THIS: if you want to do ANYTHING with cookies/sessions using fetch, remember to add this: credentials: 'include'
+  // ex.
+  // fetch("link", {
+  //      method: "GET",
+  //      headers: headerVariable,
+  //      credentials: 'include' 
+  // })
+  // DONT FORGET PLEEAASE, your sanity wont withstand that kind of stress twice!
+
+  checkLoginStatus = () => {
+    fetch("http://localhost:3000/logged_in", {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      credentials: 'include'
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        if (data.logged_in && this.state.loginStatus === false) {
+          this.setState({
+            loginStatus: true,
+            user: data.user
+          })
+        } else if (!data.logged_in && this.state.logged_in) {
+          this.setState({
+            loginStatus: false,
+            user: {}
+          })
+        }
+        console.log(data, "data in checklogin")
+        console.log(this.state, "app state after checklogin")
+      })
+      .catch(error => console.log(error))
+  }
+
+  // this is how loginstatus would look with axios
+  // checkLoginStatus = () => {
+  //   axios("http://localhost:3000/logged_in", { withCredentials: true })
+  //     .then(resp => console.log(resp.data, "response from checklogin"))
+  // }
+
+  componentDidMount() {
+    this.checkLoginStatus()
+
+  }
   render() {
     // console.log(this.state)
     return (

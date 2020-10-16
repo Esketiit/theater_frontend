@@ -12,7 +12,6 @@ class Signup extends React.Component {
     }
 
     handleChange = e => {
-        console.log(this.state)
         this.setState({ [e.target.name]: e.target.value })
         // console.log(this.state)
     }
@@ -32,9 +31,9 @@ class Signup extends React.Component {
                     password: this.state.password,
                     password_confirmation: this.state.password_confirmation
                 }
-            })
-        },
-            { withCredentials: true })
+            }),
+            credentials: 'include'
+        })
             .then(resp => resp.json())
             .then(user => {
                 if (user.status === "created") {
@@ -62,14 +61,14 @@ class Signup extends React.Component {
                     username: this.state.name,
                     password: this.state.password,
                 }
-            })
-        },
-            { withCredentials: true })
+            }),
+            credentials: 'include'
+        })
             .then(resp => resp.json())
-            .then(user => {
-                if (user.logged_in) {
-                    // sucessfulAuth adds user data to state in app.js, then redirects to the profile page 
-                    this.props.successfulAuth(user)
+            .then(data => {
+                if (data.logged_in) {
+                    // sucessfulAuth adds data data to state in app.js, then redirects to the profile page 
+                    this.props.successfulAuth(data)
                     this.props.history.push("/profile")
                 }
             })
