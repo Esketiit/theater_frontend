@@ -151,7 +151,7 @@ class Room extends React.Component {
         // console.log(this.props.rooms[this.props.match.params.id].playlist, "props")
         return (
             <>
-                <NavBar username={this.props.user.username} />
+                <NavBar username={this.props.user.username} logout={this.props.logout} />
                 <Grid>
                     <Grid.Row columns={2}>
                         <Grid.Column centered>

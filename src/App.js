@@ -63,6 +63,23 @@ class App extends React.Component {
       .catch(error => console.log(error))
   }
 
+  // does this need to passed into every instance of navbar? why can't navbar just have this? to update state, damn
+  logout = () => {
+    console.log("logged out")
+    fetch("http://localhost:3000/logout", {
+      method: "DELETE",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      credentials: 'include'
+    })
+    // this.setState({
+    //   logged_in: true,
+    //   user: {}
+    // })
+  }
+
   componentDidMount() {
     this.checkLoginStatus()
 
@@ -73,11 +90,11 @@ class App extends React.Component {
         <Router>
           {/* <Route path="/" exact render={routerProps => <Home {...routerProps} logout={this.logout} login={this.login} />} /> */}
           <Route path="/signup" render={routerProps => <Signup {...routerProps} successfulAuth={this.successfulAuth} />} />
-          <Route path="/createroom" render={() => <RoomCreation user={this.state.user} />} />
-          <Route path="/createplaylist" render={() => <PlalistCreation user={this.state.user} />} />
-          <Route path="/profile" render={() => < ProfileOptions user={this.state.user} />} />
-          <Route path="/select" render={routerProps => <RoomSelect {...routerProps} user={this.state.user} />} />
-          <Route path="/room/:id" render={routerProps => <Room {...routerProps} user={this.state.user} />} />
+          <Route path="/createroom" render={() => <RoomCreation user={this.state.user} logout={this.logout} />} />
+          <Route path="/createplaylist" render={() => <PlalistCreation user={this.state.user} logout={this.logout} />} />
+          <Route path="/profile" render={() => < ProfileOptions user={this.state.user} logout={this.logout} />} />
+          <Route path="/select" render={routerProps => <RoomSelect {...routerProps} user={this.state.user} logout={this.logout} />} />
+          <Route path="/room/:id" render={routerProps => <Room {...routerProps} user={this.state.user} logout={this.logout} />} />
         </Router>
       </>
     );

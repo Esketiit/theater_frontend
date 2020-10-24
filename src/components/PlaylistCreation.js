@@ -46,7 +46,7 @@ class PlaylistCreation extends React.Component {
     }
 
     createPlaylist = () => {
-        fetch("http://localhost:3000/playlist", {
+        fetch("http://localhost:3000/playlists", {
             method: "POST",
             headers: {
                 "Accept": "application/json",
@@ -98,7 +98,7 @@ class PlaylistCreation extends React.Component {
         console.log(this.state)
         return (
             <>
-                <NavBar />
+                <NavBar logout={this.props.logout} user={this.props.user} />
                 <Modal trigger={<Button>Create New Playlist</Button>} closeIcon>
                     <Modal.Header>Create New Playlist</Modal.Header>
                     <Modal.Content>
