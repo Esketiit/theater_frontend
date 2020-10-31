@@ -9,6 +9,7 @@
     "axios": "^0.20.0",
     "flexbox-react": "^4.4.0",
     "react": "^16.13.1",
+    "react-actioncable-provider": "^2.0.0",
     "react-dom": "^16.13.1",
     "react-player": "^2.0.1",
     "react-router-dom": "^5.2.0",
