@@ -75,12 +75,7 @@ class RoomCreation extends React.Component {
                         }
                     })
                 })
-            })
-        // this.setState({
-        //     selected: null,
-        //     name: "",
-        //     description: ""
-        // })
+            }).catch(() => console.log("error"))
     }
 
     // first creates a playlist and then creates a video using the id of the newly created playlist

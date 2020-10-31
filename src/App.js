@@ -46,6 +46,7 @@ class App extends React.Component {
     })
       .then(resp => resp.json())
       .then(data => {
+        // if a session for this user exists, but react doesnt know, update state
         if (data.logged_in && this.state.loginStatus === false) {
           this.setState({
             loginStatus: true,
@@ -57,13 +58,12 @@ class App extends React.Component {
             user: {}
           })
         }
-        console.log(data, "data in checklogin")
-        console.log(this.state, "app state after checklogin")
+        // console.log(data, "data in checklogin")
+        // console.log(this.state, "app state after checklogin")
       })
       .catch(error => console.log(error))
   }
 
-  // does this need to passed into every instance of navbar? why can't navbar just have this? to update state, damn
   logout = () => {
     console.log("logged out")
     fetch("http://localhost:3000/logout", {
@@ -74,10 +74,6 @@ class App extends React.Component {
       },
       credentials: 'include'
     })
-    // this.setState({
-    //   logged_in: true,
-    //   user: {}
-    // })
   }
 
   componentDidMount() {
