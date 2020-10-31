@@ -14,6 +14,11 @@ class RoomList extends React.Component {
             .then(data => this.setState({ rooms: data }))
     }
 
+    // checks for errors in each room
+    checkRooms = () => {
+
+    }
+
     componentDidMount() {
         this.getAllRooms()
     }
@@ -31,6 +36,9 @@ class RoomList extends React.Component {
                 </Table.Header>
                 <Table.Body>
                     {this.state.rooms.map(room => {
+                        // checks to see if this room has a playlist assigned to it. I need to address this playlist[0] thing
+                        // I want to have each room have access to multiple playlist, but I havent got there yet
+                        if (room.playlist[0]) {
                         console.log(room, "table body")
                         return (
                             <Table.Row>
@@ -41,6 +49,7 @@ class RoomList extends React.Component {
                                 <Table.Cell>{room.description}</Table.Cell>
                             </Table.Row>
                         )
+                        } 
                     })}
                 </Table.Body>
             </Table>
