@@ -5,11 +5,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'semantic-ui-css/semantic.min.css'
+import { ActionCableProvider } from 'react-actioncable-provider';
 
 ReactDOM.render(
-  // <React.StrictMode>
-  <App />
-  // </React.StrictMode>
+  <ActionCableProvider url={'ws://localhost:3000/cable'}>
+    <App />
+  </ActionCableProvider>
   ,
   document.getElementById('root')
 );

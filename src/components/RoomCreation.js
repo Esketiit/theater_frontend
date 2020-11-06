@@ -40,13 +40,14 @@ class RoomCreation extends React.Component {
 
     createRoom = (e) => {
         e.preventDefault()
+        // not sure what this is doing here, but im too scared to remove it
         let room = {
             room: {
                 name: this.state.name
             }
         }
 
-        console.log(this.state.selected)
+        console.log(this.state)
         fetch("http://localhost:3000/rooms", {
             method: "POST",
             headers: {
@@ -60,22 +61,24 @@ class RoomCreation extends React.Component {
                 }
             })
         })
-            .then(resp => resp.json())
-            .then(data => {
-                fetch("http://localhost:3000/room_playlists", {
-                    method: "POST",
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        room_playlist: {
-                            playlist_id: this.state.selected,
-                            room_id: data.id
-                        }
-                    })
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data, 'data after room is made')
+            fetch("http://localhost:3000/room_playlists", {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    room_playlist: {
+                        playlist_id: this.state.selected,
+                        room_id: data.id
+                    }
                 })
             })
+        })
+        .catch(console.log("ERROR"))
         // this.setState({
         //     selected: null,
         //     name: "",
@@ -132,6 +135,7 @@ class RoomCreation extends React.Component {
         this.getAllPlaylists()
     }
     render() {
+        console.log(this.state)
         return (
             <div className="room_form">
                 <NavBar username={this.props.user.username} logout={this.props.logout} />
