@@ -4,7 +4,8 @@ import NavBar from './NavBar'
 import CommentSection from '../containers/CommentSection'
 import { Button, List, Modal, Form, Grid } from 'semantic-ui-react'
 import Flexbox from 'flexbox-react';
-
+import { ActionCable } from 'react-actioncable-provider';
+import Cable from './Cable';
 
 class Room extends React.Component {
     state = {
@@ -35,6 +36,11 @@ class Room extends React.Component {
 
     componentDidMount() {
         this.getVideos()
+    }
+
+    //updates the chat when a new comment is revieced
+    handleRecievedChat = () => {
+
     }
 
     handleChange = e => {

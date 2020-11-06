@@ -9,31 +9,32 @@ class CommentSection extends React.Component {
         comment: ""
     }
 
-    getComments = () => {
-        fetch(`http://localhost:3000/room/${this.props.id}`)
-            .then(resp => resp.json())
-            .then(data => {
-                // console.log(data.videos)
-                this.setState({
-                    comments: data.comments,
-                    roomName: data.roomName
-                })
-            })
+    // legacy code from whence comments had thier own model lol
+    // getComments = () => {
+    //     fetch(`http://localhost:3000/rooms/${this.props.id}`)
+    //         .then(resp => resp.json())
+    //         .then(data => {
+    //             // console.log(data.videos)
+    //             this.setState({
+    //                 comments: data.comments,
+    //                 roomName: data.roomName
+    //             })
+    //         })
 
-        if (this.props.username !== "") {
-            this.setState({ currentUser: this.props.username })
-        }
-        else {
-            this.setState({ currentUser: "Anon" })
-        }
-    }
+    //     if (this.props.username !== "") {
+    //         this.setState({ currentUser: this.props.username })
+    //     }
+    //     else {
+    //         this.setState({ currentUser: "Anon" })
+    //     }
+    // }
 
     handleChange = e => {
         this.setState({ [e.target.name]: e.target.value })
     }
 
     componentDidMount() {
-        this.getComments()
+        // this.getComments()
     }
 
     showComments = () => {

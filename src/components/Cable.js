@@ -1,22 +1,23 @@
-// src/components/Cables.js
-
 import React, { Fragment } from 'react';
 import { ActionCable } from 'react-actioncable-provider';
 
-const Cable = ({ conversations, handleReceivedMessage }) => {
-    return (
-    <Fragment>
-        {conversations.map(conversation => {
+class Cable extends React.Component {
+    
+    render () {
         return (
-            <ActionCable
-            key={conversation.id}  
-            channel={{ channel: 'MessagesChannel', conversation: conversation.id }}
-            onReceived={handleReceivedMessage}
-            />
+        <Fragment>
+            {this.props.rooms.map(room => {
+            return (
+                <ActionCable
+                key={room.id}  
+                channel={{ channel: 'MessagesChannel', room: room.id }}
+                onReceived={this.props.handleReceivedMessage}
+                />
+            );
+            })}
+        </Fragment>
         );
-        })}
-    </Fragment>
-    );
+    }
 };
 
 export default Cable;
