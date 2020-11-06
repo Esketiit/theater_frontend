@@ -1,6 +1,8 @@
 import React from 'react';
 import { Menu, Grid, Table, Label } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
+import { ActionCable } from 'react-actioncable-provider';
+import Cable from '../components/Cable.js'
 
 class RoomList extends React.Component {
     state = {
@@ -72,18 +74,18 @@ class RoomList extends React.Component {
                 {/* when a new room is sent from the backend, handleReceievedRoom will run */}
                 {/* read the docs bro */}
                 <ActionCable
-                    channel={{ channel: 'RoomsChannel' }}
+                    channel={'RoomsChannel'}
                     onReceived={this.handleReceivedRoom}
                 />
                 {/* If rooms already exist, render the Cable component */}
                 {/* Cable creates an ActionCable for each individual room */}
                 {/* not sure if this should be done here or in each room component */}
-                {this.state.rooms.length ? (
+                {/* {this.state.rooms.length ? (
                     <Cable
-                        rooms={rooms}
+                        rooms={this.state.rooms}
                         handleReceivedMessage={this.handleReceivedMessage}
                     />
-                ) : null}
+                ) : null} */}
                 {this.state.rooms ? this.renderRooms() : null}
             </div>
         )
