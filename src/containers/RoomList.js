@@ -16,7 +16,7 @@ class RoomList extends React.Component {
             .then(data => this.setState({ rooms: data }))
     }
 
-    // checks for errors in data for eac room
+    // checks for errors in data for each room
     checkRooms = () => {
 
     }

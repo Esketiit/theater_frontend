@@ -6,9 +6,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'semantic-ui-css/semantic.min.css'
 import { ActionCableProvider } from 'react-actioncable-provider';
+import { API_WS_ROOT } from './constants';
 
+// API_WS_ROOT holds a string, its value is determined in constants/index.js
+// ActionCableProvider does what its name says
 ReactDOM.render(
-  <ActionCableProvider url={'ws://localhost:3000/cable'}>
+  <ActionCableProvider url={API_WS_ROOT}>
     <App />
   </ActionCableProvider>
   ,

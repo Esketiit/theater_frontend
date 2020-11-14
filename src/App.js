@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import Signup from './components/Signup'
 import Room from './components/Room'
 import RoomCreation from './components/RoomCreation'
@@ -10,7 +10,6 @@ import './App.css';
 
 class App extends React.Component {
   state = {
-    rooms: null,
     loginStatus: false,
     user: {}
   }
@@ -36,6 +35,7 @@ class App extends React.Component {
   // Axios makes accessing api's easier to type, you should probably look into it
 
   checkLoginStatus = () => {
+    console.log("check login status running")
     fetch("http://localhost:3000/logged_in", {
       method: "GET",
       headers: {
@@ -48,15 +48,19 @@ class App extends React.Component {
       .then(data => {
         // if a session for this user exists, but react doesnt know, update state
         if (data.logged_in && this.state.loginStatus === false) {
+          console.log("logged in")
           this.setState({
             loginStatus: true,
             user: data.user
           })
+          // if there is no session and react has user data, get rid of user data
         } else if (!data.logged_in && this.state.logged_in) {
+          console.log("not logged in")
           this.setState({
             loginStatus: false,
             user: {}
           })
+          return <Redirect to='/signup'/>
         }
         // console.log(data, "data in checklogin")
         // console.log(this.state, "app state after checklogin")
@@ -65,6 +69,7 @@ class App extends React.Component {
   }
 
   logout = () => {
+    // send logout request to backend
     console.log("logged out")
     fetch("http://localhost:3000/logout", {
       method: "DELETE",
@@ -74,13 +79,19 @@ class App extends React.Component {
       },
       credentials: 'include'
     })
+    // then update state
+    .then(() => this.setState({
+      loginStatus: false,
+      user: {}
+    }))
   }
 
   componentDidMount() {
     this.checkLoginStatus()
-
   }
+
   render() {
+    console.log(this.state)
     return (
       <>
         <Router>
@@ -88,7 +99,7 @@ class App extends React.Component {
           <Route path="/signup" render={routerProps => <Signup {...routerProps} successfulAuth={this.successfulAuth} />} />
           <Route path="/createroom" render={() => <RoomCreation user={this.state.user} logout={this.logout} />} />
           <Route path="/createplaylist" render={() => <PlalistCreation user={this.state.user} logout={this.logout} />} />
-          <Route path="/profile" render={() => < ProfileOptions user={this.state.user} logout={this.logout} />} />
+          <Route path="/profile" render={() => < ProfileOptions user={this.state.user} logout={this.logout} checkLoginStatus={this.checkLoginStatus}/>} />
           <Route path="/select" render={routerProps => <RoomSelect {...routerProps} user={this.state.user} logout={this.logout} />} />
           <Route path="/room/:id" render={routerProps => <Room {...routerProps} user={this.state.user} logout={this.logout} />} />
         </Router>
